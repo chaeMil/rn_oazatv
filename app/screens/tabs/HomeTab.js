@@ -4,7 +4,7 @@ import Api from "../../api/Api";
 
 type Props = {};
 
-class HomeTab extends Component<Props> {
+export default class HomeTab extends Component<Props> {
     constructor(props) {
         super(props);
         this.state = {
@@ -18,10 +18,11 @@ class HomeTab extends Component<Props> {
     }
 
     loadPopularVideos() {
-        Api.getPopularVideos((response) => {
+        Api.getPopularVideos((videos) => {
+                console.log(videos);
                 this.setState({
                     isLoading: false,
-                    videos: response
+                    videos: videos
                 });
             },
             (error) => {
@@ -48,7 +49,7 @@ class HomeTab extends Component<Props> {
                                 <Text>{item.title}</Text>
                             </View>
                         }
-                        keyExtractor={item => item.hash_id}
+                        keyExtractor={item => item.hashId}
                     />
                 </View>
             );
@@ -73,5 +74,3 @@ const styles = StyleSheet.create({
         borderBottomColor: '#eee'
     }
 });
-
-export default HomeTab

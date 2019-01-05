@@ -1,12 +1,14 @@
 import axios from "axios";
 import Constants from "../Constants";
+import ArchiveItem from "../models/ArchiveItem";
 
-class Api {
+export default class Api {
     static getPopularVideos(onSuccess, onError) {
         axios.get(`${Constants.API}/popular-videos/`)
             .then((response) => {
-                console.log(response.data);
-                onSuccess(response.data);
+                let videos = ArchiveItem.parseMultiple(response.data);
+                console.log(videos);
+                onSuccess(videos);
             })
             .catch((error) => {
                 console.log(error);
@@ -14,5 +16,3 @@ class Api {
             });
     }
 }
-
-export default Api
