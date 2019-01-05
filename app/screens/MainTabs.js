@@ -1,27 +1,8 @@
 import React from 'react';
-import { Text, View } from 'react-native';
-import { createBottomTabNavigator } from 'react-navigation';
+import {createBottomTabNavigator} from 'react-navigation';
 import Colors from "../assets/Colors";
-
-class HomeTab extends React.Component {
-    render() {
-        return (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <Text>Home!</Text>
-            </View>
-        );
-    }
-}
-
-class SettingsTab extends React.Component {
-    render() {
-        return (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <Text>Settings!</Text>
-            </View>
-        );
-    }
-}
+import HomeTab from "./tabs/HomeTab";
+import SettingsTab from "./tabs/SettingsTab";
 
 const MainTabs = createBottomTabNavigator({
     Home: HomeTab,
