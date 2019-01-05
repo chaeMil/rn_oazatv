@@ -10,6 +10,7 @@ import React, {Component} from 'react';
 import MainNavigation from "./screens/MainNavigation";
 
 type Props = {};
+
 export default class App extends Component<Props> {
     render() {
         return (
