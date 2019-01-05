@@ -14,7 +14,21 @@ export default class HomeTab extends Component<Props> {
     }
 
     componentDidMount(): void {
-        this.loadPopularVideos()
+        //this.loadPopularVideos();
+        this.loadVideos();
+    }
+
+    loadVideos() {
+        Api.getVideos(1, (videos) => {
+                this.setState({
+                    isLoading: false,
+                    videos: videos
+                });
+            },
+            (error) => {
+
+            }
+        );
     }
 
     loadPopularVideos() {
@@ -22,7 +36,7 @@ export default class HomeTab extends Component<Props> {
                 console.log(videos);
                 this.setState({
                     isLoading: false,
-                    videos: videos
+                    popularVideos: videos
                 });
             },
             (error) => {
@@ -46,7 +60,7 @@ export default class HomeTab extends Component<Props> {
                         showsVerticalScrollIndicator={false}
                         renderItem={({item}) =>
                             <View style={styles.item}>
-                                <Text>{item.title}</Text>
+                                <Text>{item.getTitle()}</Text>
                             </View>
                         }
                         keyExtractor={item => item.hashId}

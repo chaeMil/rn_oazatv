@@ -1,8 +1,10 @@
+import _ from "lodash";
+
 export default class ArchiveFile {
     constructor(jsonInput) {
         this.title = jsonInput.title;
         this.description = jsonInput.description;
-        this.file = jsonInput.file;
+        this.file = new File(jsonInput.file);
         this.fileType = jsonInput.file_type;
         this.languageId = jsonInput.language_id;
         this.createdAt = jsonInput.created_at;
@@ -17,4 +19,26 @@ export default class ArchiveFile {
         });
         return files;
     }
+}
+
+class File {
+    constructor(jsonInput) {
+        _.assign(this, jsonInput);
+    }
+
+    getType() {
+        return this.type;
+    }
+
+    getThumbnail() {
+        return this.thumb.url;
+    }
+
+    static FileType = Object.freeze({
+        "UNDEFINED": "undefined",
+        "IMAGE": "image",
+        "VIDEO": "video",
+        "AUDIO": "audio",
+        "SUBTITLES": "subtitles"
+    });
 }
