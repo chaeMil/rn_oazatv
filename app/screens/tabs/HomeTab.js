@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Text, View, ActivityIndicator, StyleSheet, FlatList} from "react-native";
-import Constants from "../../Constants";
-import axios from "axios";
+import Api from "../../api/Api";
 
 type Props = {};
 
@@ -15,18 +14,20 @@ class HomeTab extends Component<Props> {
     }
 
     componentDidMount(): void {
-        return axios.get(`${Constants.API}/videos/`)
-            .then((response) => {
-                console.log(response.data);
+        this.loadPopularVideos()
+    }
+
+    loadPopularVideos() {
+        Api.getPopularVideos((response) => {
                 this.setState({
                     isLoading: false,
-                    videos: response.data
-                })
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+                    videos: response
+                });
+            },
+            (error) => {
 
+            }
+        );
     }
 
     render() {
